@@ -11,8 +11,6 @@ const config = require('./config.json');
 
 const app = express();
 
-let oldIp = "0.0.0.0";
-
 errorToJSON();
 mysql.connect(config.DB.schema,config.DB.account,config.DB.password,config.DB.option).then(_=>{
     return updateIp();
@@ -101,10 +99,12 @@ function verify(req,res,next)
 function updateIp(){
     const getOldIp = axios.get("https://rpg4hproject.firebaseio.com/IP.json");
     const getCurrentIp= axios.get("http://ifconfig.me/ip");
+    let oldIp='0.0.0.0';
     return Promise.all([getOldIp,getCurrentIp]).then(result=>{
         if(result[0].data)oldIp = result[0].data.ip||oldIp;
         if(oldIp!=result[1].data){
-            axios.put("https://rpg4hproject.firebaseio.com/IP.json",{ip:oldIp});
+            axios.put("https://rpg4hproject.firebaseio.com/IP.json",{ip:result[1].data});
+            oldIp = result[1].data;
         }
     });
 }
