@@ -1,0 +1,37 @@
+.bounce-enter-active {
+    animation: bounce-in .5s;
+}
+.bounce-leave-active {
+    animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .3s ease;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+.circle{
+    animation: circle 7.2s infinite steps(30, end);
+}
+@keyframes circle{
+    0%{ 
+        transform:rotate(0deg); 
+    }
+    100%{ 
+        transform:rotate(360deg); 
+    }
+ }

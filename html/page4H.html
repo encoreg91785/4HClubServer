@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" type="text/css" href="../css/loading.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/content.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/animation.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <meta charset="UTF-8">
+<title>
+    4H-Club-BackEnd
+</title>
+    
+<head>
+</head>
+<body>
+    <div id=app v-cloak>
+        <div class=content><!--主要內容-->
+            <div class="title"><h1>深坑四健會活動後台</h1></div>
+            <div class=area>
+                <button>asdf</button>
+                <button>好帥</button>
+                <button>asdf</button>
+            </div>
+            <div class="page">
+                <div class="range">
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                    <h1>adsfasdfasdfsafd</h1>
+                </div>
+            </div>
+        </div>
+        
+        <transition name="fade"><!--動畫-->
+            <!--跳出訊息或是讀取中-->
+            <div v-show='isShow' class=loading>
+                <transition name="bounce">
+                    <div class='loading_area'  v-show='isShow'><!--主要訊息範圍-->
+                        <table class=message>
+                            <tr class="title">
+                                <td colspan="2"><span class=auto_newline>{{loadingTitle}}</span></td>
+                            </tr>
+                            <tr class="middle">
+                                <td colspan="2">
+                                    <table width=100% height=100% text-align=center>
+                                        <tr  v-show='isShowMessage'><td class=auto_newline><span class="text_area">{{loadingMessage}}</span></td></tr>
+                                        <tr  v-show='isLoading' >
+                                            <td >
+                                                <img class="circle" src="../resource/loading.png"></img>       
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr class="footer" v-show='!isOneButton'>
+                                <td><button  class='two_btn' @click='upload'>asdf</button></td>
+                                <td><button  class='two_btn' @click='upload'>asdf</button></td>
+                            </tr>
+                            <tr class="footer" v-show='isOneButton'>
+                                <td><button  class='one_btn' @click='upload'>asdf</button></td>
+                            </tr>
+                        </table>
+                        
+                    </div>
+                </transition>
+            </div>
+        </transition>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="module" src="../js/page4H.js"></script>
+</html>

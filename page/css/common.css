@@ -1,0 +1,37 @@
+[v-cloak]{
+	display:none;
+}
+
+html, body ,#app{
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'seto';
+}
+.auto_newline
+{
+    word-break: break-all;/*必須*/
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgb(182, 182, 182);
+    border-radius: 2vh;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(82, 82, 82);
+    border-radius: 2vh;
+}
+
+@font-face {
+    font-family: 'seto';   /*字体名称*/
+    src: url('../font/setofont/setofont.ttf');       /*字体源文件*/
+  }

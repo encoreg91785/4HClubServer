@@ -1,0 +1,95 @@
+.loading{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    position: absolute;
+    
+}
+.loading_area{
+    width: 30vw;
+    height: 30vw;
+    background-color: white;
+    position: absolute;
+    left: 35vw;
+    top: calc(50% - 15vw);
+    border-radius: 2vw;
+    border-style: solid;
+    border-width: 0.8vh;
+    border-color:#FFAC55;
+}
+.loading_area .message{
+    background-image: url("../resource/4h.png");
+    background-size: 100%;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+   
+}
+
+.loading_area .message .title{
+    width: 100%;
+    height: 20%;
+    font-size: 4vh;
+    
+}
+.loading_area .message .title span{
+    padding: 2vh;
+    border-style: dashed;
+    background-color: rgba(148, 216, 255, 0.4);
+    border-radius: 2vh;
+}
+.loading_area .message .middle{
+    width: 100%;
+    height: 60%;
+    font-size: 3vh;
+}
+
+.loading_area .message .middle table{
+    padding: 2vh;
+    border-style: dashed;
+    background-color: rgba(148, 216, 255, 0.4);
+    border-radius: 2vh;
+    border-color: black;
+}
+
+.loading_area .message .footer{
+    height: 20%;
+    font-size: 3vh;
+}
+
+.loading_area .message .two_btn{
+    width: 60%;
+    height: 60%;
+}
+
+.loading_area .message .one_btn{
+    width: 30%;
+    height: 60%;
+}
+
+.loading_area .message button{
+    padding: 10px 10px;
+    font-size: 3vh;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: black;
+    background-color: #80acff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 6px #999;
+}
+
+.loading_area .message button:hover{
+    background-color: #5979b4;
+}
+
+.loading_area .message button:active{
+    background-color: #5979b4;
+}
+
+.middle img{
+    width: 6vw;
+    height: 6vw;
+}
