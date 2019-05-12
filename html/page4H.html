@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../css/animation.css"/>
     <link rel="stylesheet" type="text/css" href="../css/common.css"/>
     <meta charset="UTF-8">
+    
 <title>
     4H-Club-BackEnd
 </title>
@@ -15,49 +16,32 @@
     <div id=app v-cloak>
         <div class=content><!--主要內容-->
             <div class="title"><h1>深坑四健會活動後台</h1></div>
-            <div class=area>
-                <button>asdf</button>
-                <button>好帥</button>
-                <button>asdf</button>
+            <div class=btn_area>
+                <a><button class="animation_btn">玩家</button></a>
+                <a><button class="animation_btn">卡牌</button></a>
+                <a><button class="animation_btn">任務</button></a>
+                <a><button class="animation_btn">上傳EXCEL檔案</button></a>
             </div>
+            
             <div class="page">
-                <div class="range">
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
-                    <h1>adsfasdfasdfsafd</h1>
+                <div class=extra_btn_area>
+                    <div class="area">
+                        <button class="scale_btn" @click='e.func' v-for="e in extraEvent">{{e.name}}</button>
+                    </div>
+                </div>
+                <div class="title_area">
+                    <table class="item_title">
+                        <tr>
+                            <td v-for="t in title">{{t}}</td>
+                        </tr>
+                </table>
+                </div>
+                <div class="range auto_newline">
+                    <keep-alive>
+                        <div>
+                            <component :is='temp' class="item" v-bind:e='e' v-bind:func='func' v-for="e in content"></component>
+                        </div>
+                    </keep-alive>
                 </div>
             </div>
         </div>
@@ -84,11 +68,11 @@
                                 </td>
                             </tr>
                             <tr class="footer" v-show='!isOneButton'>
-                                <td><button  class='two_btn' @click='upload'>asdf</button></td>
-                                <td><button  class='two_btn' @click='upload'>asdf</button></td>
+                                <td><button  class='two_btn' @click='oneButtonClick'>確定</button></td>
+                                <td><button  class='two_btn' @click='twoButtonClick'>取消</button></td>
                             </tr>
                             <tr class="footer" v-show='isOneButton'>
-                                <td><button  class='one_btn' @click='upload'>asdf</button></td>
+                                <td><button  class='one_btn' @click='oneButtonClick'>確定</button></td>
                             </tr>
                         </table>
                         
@@ -100,5 +84,32 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<!--#region player template -->
+<script type="text/x-template" id="player_item">
+    <table class='plater_item'>
+            <tr>
+                <td width=25%>{{e.rank}}</td>
+                <td width=25%>{{e.name}}</td>
+                <td width=25%>{{e.team}}</td>
+                <td width=25%>{{e.total}}</td>
+            </tr>
+    </table>
+</script>
+<!--#endregion-->
+
+<!--#region card template -->
+<script type="text/x-template" id="player_item">
+    <table class='plater_item'>
+            <tr>
+                <td>{{e.name}}</td>
+                <td>{{e.name}}</td>
+                <td>{{e.team}}</td>
+                <td>{{e.total}}</td>
+            </tr>
+    </table>
+</script>
+<!--#endregion-->
+
 <script type="module" src="../js/page4H.js"></script>
 </html>

@@ -11,6 +11,8 @@ const config = require('./config.json');
 
 const app = express();
 
+let oldIp='0.0.0.0';
+
 errorToJSON();
 mysql.connect(config.DB.schema,config.DB.account,config.DB.password,config.DB.option).then(_=>{
     return updateIp();
@@ -18,6 +20,8 @@ mysql.connect(config.DB.schema,config.DB.account,config.DB.password,config.DB.op
     return loadManager();//確認所有Manager都初始化完成
 }).then(_=>{
     startServer();//都完成後才會開始RunServer
+}).catch(error=>{
+    console.log(error);
 });
 
 /**
@@ -47,13 +51,13 @@ function loadRouter(){
 
 /**
  * 開始啟動服務
- * 1.啟動美6小時檢驗IP是否更動
+ * 1.啟動檢驗IP是否更動
  * 2.資料解析
  * 3.讀取所有Router
  */
 function startServer()
 {
-    setInterval(updateIp,6*60*60*1000);//每6小時更新一次IP
+    keepCheckIp();
     app.use(parseMultipart);
     app.use(bodyParser.json({limit: '50mb'}));//json
     app.use(bodyParser.urlencoded({extended:true ,limit: '50mb',parameterLimit:50000}));//x-www-form-urlencoded
@@ -97,16 +101,31 @@ function verify(req,res,next)
  * 更新IP到FireBase
  */
 function updateIp(){
-    const getOldIp = axios.get("https://rpg4hproject.firebaseio.com/IP.json");
-    const getCurrentIp= axios.get("http://ifconfig.me/ip");
-    let oldIp='0.0.0.0';
-    return Promise.all([getOldIp,getCurrentIp]).then(result=>{
-        if(result[0].data)oldIp = result[0].data.ip||oldIp;
-        if(oldIp!=result[1].data){
-            axios.put("https://rpg4hproject.firebaseio.com/IP.json",{ip:result[1].data});
-            oldIp = result[1].data;
+    return axios.get("https://rpg4hproject.firebaseio.com/IP.json").then(result=>{
+        oldIp = result.data.ip;
+        return axios.get("http://ifconfig.me/ip");
+    }).then(result=>{
+        if(oldIp!=result.data){
+            oldIp = result.data;
+            return axios.put("https://rpg4hproject.firebaseio.com/IP.json",{ip:result.data});
         }
+        else return new Promise((resolve,reject)=>{return resolve();});
     });
+}
+
+/**
+ * 每六個小時檢查IP是否更動
+ */
+function keepCheckIp(){
+    setInterval(()=>{
+        xios.get("http://ifconfig.me/ip").then(result=>{
+            if(oldIp!=result.data){
+                oldIp = result.data;
+                axios.put("https://rpg4hproject.firebaseio.com/IP.json",{ip:result.data});
+            }
+        });
+    },30*60*1000);
+    
 }
 
 /**

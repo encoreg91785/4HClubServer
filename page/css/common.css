@@ -8,6 +8,8 @@ html, body ,#app{
     height: 100vh;
     overflow: hidden;
     font-family: 'seto';
+    background-size: 100px;
+    background-image: url("/resource/logo.jpg");
 }
 .auto_newline
 {
@@ -16,11 +18,12 @@ html, body ,#app{
 
 /* width */
 ::-webkit-scrollbar {
-    width: 20px;
+    width: 2vw;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
+    
     background: rgb(182, 182, 182);
     border-radius: 2vh;
 }
@@ -29,6 +32,45 @@ html, body ,#app{
 ::-webkit-scrollbar-thumb {
     background: rgb(82, 82, 82);
     border-radius: 2vh;
+}
+
+.animation_btn{
+    padding: 10px 10px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 6px 6px #999;
+
+}
+
+.scale_btn{
+    cursor:pointer;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 10px 10px;
+    width: 90%;
+    border-radius:15px;
+}
+
+.scale_btn:hover{
+    transform: scale(1.1);
+}
+
+.scale_btn:active{
+    transform: scale(1);
+}
+
+.animation_btn:hover{
+    transform: translate(-2px,-2px);
+    box-shadow: 8px 8px #999;
+}
+
+.animation_btn:active{
+    transform: translate(4px,4px);
+    box-shadow: 4px 4px #999;
 }
 
 @font-face {

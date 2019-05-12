@@ -29,12 +29,18 @@ module.exports.defineTables={
         table:{
             qrcode:{type:Sequelize.STRING(50),allowNull: false,unique: true,primaryKey: true},
             cardqrcode:{type:Sequelize.STRING(50),allowNull: false},
+            type:{type:Sequelize.STRING(50),allowNull: true},
+            name:{type:Sequelize.STRING(50),allowNull: false},
+            condition:{type:Sequelize.STRING,allowNull: false},
+            information:{type:Sequelize.STRING,allowNull: false},
         },
         option:null,
     },
     carddata:{
         table:{
             qrcode:{type:Sequelize.STRING(50),allowNull: false,unique: true,primaryKey: true},
+            name:{type:Sequelize.STRING(50),allowNull: false},
+            type:{type:Sequelize.STRING(50),allowNull: true},
             max:{type:Sequelize.INTEGER,defaultValue:-1},
         },
         option:null,
