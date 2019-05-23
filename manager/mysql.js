@@ -32,6 +32,7 @@ function connect(database,userName,password,option){
 function testConnect(database,userName,password,option){
     let testConnect = new Sequelize(null,userName,password,option);
     return testConnect.query("create schema if not exists "+ database +";").then(_=>{
+        testConnect.close();
         console.log('Connection has been '+ database +'successfully.');
     });
 }

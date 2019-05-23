@@ -69,6 +69,7 @@
 }
 
 .loading_area .message button{
+    font-family: 'seto';
     padding: 10px 10px;
     font-size: 3vh;
     text-align: center;

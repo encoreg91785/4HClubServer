@@ -13,9 +13,9 @@ new Vue({
 	el:'#app',
 	data:{
         logadTitle:"大帥哥你好",
-        isShow:false,
-        isShowMessage:false,
-        isLoading:false,
+        isShow:true,
+        isShowMessage:true,
+        isLoading:true,
         isOneButton:false,
 
         //應該使用的template 名稱

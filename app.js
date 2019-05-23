@@ -118,7 +118,7 @@ function updateIp(){
  */
 function keepCheckIp(){
     setInterval(()=>{
-        xios.get("http://ifconfig.me/ip").then(result=>{
+        axios.get("http://ifconfig.me/ip").then(result=>{
             if(oldIp!=result.data){
                 oldIp = result.data;
                 axios.put("https://rpg4hproject.firebaseio.com/IP.json",{ip:result.data});
