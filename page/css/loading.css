@@ -6,9 +6,10 @@
     position: absolute;
     
 }
+
 .loading_area{
     width: 30vw;
-    height: 30vw;
+    height: 50vh;
     background-color: white;
     position: absolute;
     left: 35vw;
@@ -18,6 +19,7 @@
     border-width: 0.8vh;
     border-color:#FFAC55;
 }
+
 .loading_area .message{
     background-image: url("../resource/4h.png");
     background-size: 100%;
@@ -71,7 +73,7 @@
 .loading_area .message button{
     font-family: 'seto';
     padding: 10px 10px;
-    font-size: 3vh;
+    font-size: 2vh;
     text-align: center;
     cursor: pointer;
     outline: none;

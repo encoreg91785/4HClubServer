@@ -11,12 +11,14 @@ function connect(database,userName,password,option){
     return new Promise((resolve) => {
         const defaultOption = { host: 'localhost',dialect: 'mysql'};
         option = option||defaultOption;
-        let tc =testConnect(database,userName,password,option).then(()=>{
+        testConnect(database,userName,password,option).then(()=>{
             sequelize = new Sequelize(database,userName,password,option);
             let p =loadTables(constantData.defineTables);
             return p;
+        }).then(_=>{
+            return resolve();
         });
-        return resolve(tc);
+        
     }).catch(err=>{
         console.error('Unable to connect to the database:', err);
     });

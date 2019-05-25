@@ -17,7 +17,7 @@
         <div class=content><!--主要內容-->
             <div class="title"><h1>深坑四健會活動後台</h1></div>
             <div class=btn_area>
-                <a><button class="animation_btn">玩家</button></a>
+                <a><button class="animation_btn" @click="upload">玩家</button></a>
                 <a><button class="animation_btn">卡牌</button></a>
                 <a><button class="animation_btn">任務</button></a>
                 <a><button class="animation_btn">上傳EXCEL檔案</button></a>
@@ -50,7 +50,7 @@
             <!--跳出訊息或是讀取中-->
             <div v-show='isShow' class=loading>
                 <transition name="bounce">
-                    <div class='loading_area'  v-show='isShow'><!--主要訊息範圍-->
+                    <div class='loading_area' v-show='isShow'><!--主要訊息範圍-->
                         <table class=message>
                             <tr class="title">
                                 <td colspan="2"><span class=auto_newline>{{loadingTitle}}</span></td>
@@ -75,11 +75,11 @@
                                     </table>
                                 </td>
                             </tr>
-                            <tr class="footer" v-show='!isOneButton'>
-                                <td><button class='two_btn' @click='oneButtonClick'>確定</button></td>
+                            <tr class="footer" v-show='!isOneButton&&isShowButton'>
+                                <td><button class='two_btn' @click='upload'>確定</button></td>
                                 <td><button class='two_btn' @click='twoButtonClick'>取消</button></td>
                             </tr>
-                            <tr class="footer" v-show='isOneButton'>
+                            <tr class="footer" v-show='isOneButton&&isShowButton'>
                                 <td><button  class='one_btn' @click='oneButtonClick'>確定</button></td>
                             </tr>
                         </table>

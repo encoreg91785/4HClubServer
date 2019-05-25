@@ -17,6 +17,7 @@ new Vue({
         isShowMessage:true,
         isLoading:true,
         isOneButton:false,
+        isShowButton:true,
 
         //應該使用的template 名稱
         temp:'player_item',

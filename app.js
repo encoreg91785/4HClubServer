@@ -109,12 +109,12 @@ function updateIp(){
             oldIp = result.data;
             return axios.put("https://rpg4hproject.firebaseio.com/IP.json",{ip:result.data});
         }
-        else return new Promise((resolve,reject)=>{return resolve();});
+        else return Promise.resolve();
     });
 }
 
 /**
- * 每六個小時檢查IP是否更動
+ * 每半個小時檢查IP是否更動
  */
 function keepCheckIp(){
     setInterval(()=>{
