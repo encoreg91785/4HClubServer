@@ -15,8 +15,7 @@
 
 .content .btn_area{
     text-align:center;
-    width: 100%;
-    height: 6vw;
+    height:100px;
     display: inline-grid;
     grid-template-columns:repeat(4,1fr);
     justify-content: space-evenly;
@@ -27,7 +26,7 @@
 }
 
 .content .btn_area button{
-    width: 20vw;
+    width: 100%;
     height: 100%;
     font-size: 32px;
     background-color: #a5c4fd;
@@ -110,11 +109,6 @@
 }
 
 .content .page .range .item{
-    width:100%;
-    height: 10%;
-}
-
-.plater_item{
     width:100%;
     height: 10%;
 }

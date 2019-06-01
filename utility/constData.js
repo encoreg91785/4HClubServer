@@ -30,16 +30,16 @@ module.exports.defineTables={
             qrcode:{type:Sequelize.STRING(50),allowNull: false,unique: true,primaryKey: true},
             cardqrcode:{type:Sequelize.STRING(50),allowNull: false},
             type:{type:Sequelize.STRING(50),allowNull: true},
-            name:{type:Sequelize.STRING(50),allowNull: false},
-            condition:{type:Sequelize.STRING,allowNull: false},
-            information:{type:Sequelize.STRING,allowNull: false},
+            name:{type:Sequelize.STRING(50),allowNull: true},
+            condition:{type:Sequelize.STRING},
+            information:{type:Sequelize.STRING},
         },
         option:null,
     },
     carddata:{
         table:{
             qrcode:{type:Sequelize.STRING(50),allowNull: false,unique: true,primaryKey: true},
-            name:{type:Sequelize.STRING(50),allowNull: false},
+            name:{type:Sequelize.STRING(50),allowNull: true},
             type:{type:Sequelize.STRING(50),allowNull: true},
             max:{type:Sequelize.INTEGER,defaultValue:-1},
         },
@@ -48,8 +48,9 @@ module.exports.defineTables={
     card:{
         table:{
             id:{type:Sequelize.INTEGER,primaryKey: true,autoIncrement: true,},
-            playerqrcode:{type:Sequelize.INTEGER,allowNull: false},
+            playerqrcode:{type:Sequelize.STRING(50),allowNull: false},
             cardqrcode:{type:Sequelize.STRING(50),allowNull: false},
+            from:{type:Sequelize.STRING(50),allowNull: false},
             create:{type:Sequelize.DATE,allowNull: false},
         },
         option:null,

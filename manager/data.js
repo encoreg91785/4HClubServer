@@ -74,6 +74,7 @@ function getTaskByQRCode(qrcode){
 function getCardByQRCode(qrcode){
     return cardData[qrcode];
 };
-
+module.exports.cardData=cardData;
+module.exports.taskData=taskData;
 module.exports.init=init;
 module.exports.updateTempData=updateTempData;

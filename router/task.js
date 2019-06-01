@@ -57,6 +57,14 @@ router.get("/",(req,res)=>{
     }
 });
 
+router.get("/all",(req,res)=>{
+    mysql.modules.task.findAll().then(result=>{
+        res.json(getResTemp(response.successful,result));
+    }).catch(error=>{
+        res.json(getResTemp(response.getError,error));
+    });
+});
+
 /**
  * key taskid:Array[]
  * 玩家領取卡片

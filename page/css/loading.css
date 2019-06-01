@@ -32,7 +32,7 @@
 .loading_area .message .title{
     width: 100%;
     height: 20%;
-    font-size: 4vh;
+    font-size: 20px;
     
 }
 .loading_area .message .title span{
@@ -44,11 +44,10 @@
 .loading_area .message .middle{
     width: 100%;
     height: 60%;
-    font-size: 3vh;
+    font-size: 20px;
 }
 
 .loading_area .message .middle table{
-    padding: 2vh;
     border-style: dashed;
     background-color: rgba(148, 216, 255, 0.4);
     border-radius: 2vh;
@@ -57,7 +56,7 @@
 
 .loading_area .message .footer{
     height: 20%;
-    font-size: 3vh;
+    font-size: 20px;
 }
 
 .loading_area .message .two_btn{
@@ -73,7 +72,7 @@
 .loading_area .message button{
     font-family: 'seto';
     padding: 10px 10px;
-    font-size: 2vh;
+    font-size: 20px;
     text-align: center;
     cursor: pointer;
     outline: none;

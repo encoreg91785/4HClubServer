@@ -32,12 +32,18 @@ router.get("/",(req,res)=>{
                 result.update({update:Date.now()});
                 result.update=Date.now();
             }
-            res.json(getResTemp(result.successful,result));
+            res.json(getResTemp(response.successful,result));
         });
     }
     else{
         res.json(getResTemp(response.getError,"player qrcode is null or empty"));
     }
+});
+
+router.get("/all",(req,res)=>{
+    mysql.modules.player.findAll().then(result=>{
+        res.json(getResTemp(result.successful,result));
+    });
 });
 
 /**
@@ -47,10 +53,12 @@ router.get("/",(req,res)=>{
  */
 router.put("/",(req,res)=>{
     let qr=req.query.playerqrcode;
-    if(stringIsNullOrEmpty(qr)){
-        mysql.modules.player.update({
-            name:req.query.name,team:req.query.team
-        },
+    let updateData =req.query.updateData;
+    if(stringIsNullOrEmpty(qr)&&stringIsNullOrEmpty(updateData)){
+        updateData = JSON.parse(updateData);
+        mysql.modules.player.update(
+            updateData
+        ,
         {
             where:{qrcode:qr}
         }).then(_=>{
