@@ -22,7 +22,9 @@ router.post("/:filesName",(req,res)=>{
         if(req.params.filesName!=null){
             switch(req.params.filesName){
                 case 'tempData':
-                    p = uploadTempData(excel);
+                    p = uploadTempData(excel).then(_=>{
+                        return data.init();
+                    });
                     break;
                 case 'playerData':
                     p = uploadPlayerData(excel);

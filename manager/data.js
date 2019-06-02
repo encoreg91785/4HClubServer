@@ -4,19 +4,26 @@ const mysql = require('./mysql');
 /**
  * 卡牌模板
  */
-const cardData={};
+let cardData={};
 /**
  * 任務模板
  */
-const taskData={};
+let taskData={};
 
 /**
  * 初始化
  */
  function init(){
     return new Promise((resolve,reject)=>{
+        Object.keys(cardData).forEach(function (prop) {
+            delete cardData[prop];
+        });
+
+        Object.keys(taskData).forEach(function (prop) {
+            delete taskData[prop];
+        });
         let cardp=mysql.modules.carddata.findAll().then(result=>{
-            if(result!=null&&result.length>0){
+            if(result!=null){
                 result.forEach(e=>{
                     cardData[e['qrcode']]=e;
                 });
@@ -26,7 +33,7 @@ const taskData={};
             }
         });
         let taskp=mysql.modules.taskdata.findAll().then(result=>{
-            if(result!=null&&result.length>0){
+            if(result!=null){
                 result.forEach(e=>{
                     taskData[e['qrcode']]=e;
                 });
@@ -48,9 +55,7 @@ function updateTempData(dataArray,tableName){
     let p;
     if(dataArray!=null&&dataArray.length>0&&['player','carddata','taskdata'].includes(tableName)){
         p = mysql.modules[tableName].sync({force:true}).then(_=>{
-            return mysql.modules[tableName].bulkCreate(dataArray).then(result=>{
-                console.log(result);            
-            });
+            return mysql.modules[tableName].bulkCreate(dataArray);
         });
     }
     else{

@@ -90,12 +90,8 @@ let v = new Vue({
         twoButtonClick:()=>{alert("two")},
     },
     mounted:function(){
-        axios.get("/temp").then(res=>{
-            this.cardTemp = res.data.data.card;
-            this.taskTemp = res.data.data.task;
+        loadTempData().finally(_=>{
             this.isShowAll = true;
-        }).catch(error=>{
-            this.onMessage(true,"錯誤發生","錯誤訊息:"+error,false,[closeLoading]);
         });
     },
     methods: {
@@ -139,20 +135,25 @@ let v = new Vue({
                 if(this.tempFile!=null)p.push(uploadTempData(this.tempFile));
                 if(this.playerFile!=null)p.push(uploadPlayerData(this.playerFile));
                 if(p.length>0){
+                    let msg="";
+                    let title=null;
                     this.onMessage(true,"上傳中","請稍後",true);
                     Promise.all(p).then(result=>{
-                        let msg="";
-                        let title=null;
+                        
                         result.forEach(e=>{
                             if(e.data.result!='successful')msg += e.datat.data;
                         })
                         if(msg==""){
                             title = "成功";
                             msg = "上傳完成"
+                            return loadTempData();
                         }
                         else{
                             title = "上傳失敗請查看相關訊息";
                         }
+                        
+                        
+                    }).then(_=>{
                         this.onMessage(true,title,msg,false,[()=>{ closeLoading();restetFile();}])
                     })
                 }
@@ -264,4 +265,13 @@ function uploadPlayerData(file){
     var data= new FormData();
     data.append("player",file);
     return axios.post('/uploadExcel/playerData',data,{header:{'Content-Type':'multipart/form-data'}});
+}
+
+function loadTempData(){
+    return axios.get("/temp").then(res=>{
+        v.cardTemp = res.data.data.card;
+        v.taskTemp = res.data.data.task;
+    }).catch(error=>{
+        v.onMessage(true,"錯誤發生","錯誤訊息:"+error,false,[closeLoading]);
+    });
 }
