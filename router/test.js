@@ -2,6 +2,13 @@
 const express = require('express');  
 const router = express.Router();
 
+const mysql = require('../manager/mysql');
+
+const constData = require('../utility/constData');  
+const response = constData.response;
+const getResTemp = constData.getResTemp;
+const stringIsNullOrEmpty = constData.stringIsNullOrEmpty;
+
 router.all("/",(req,res,next)=>{
     console.log(req.baseUrl+'(all)');
     next();

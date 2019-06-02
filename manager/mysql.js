@@ -1,11 +1,14 @@
 "use strict";
 const Sequelize = require('sequelize');
 const constantData = require('../utility/constData');
+/**
+ * 連線實體
+ */
 let sequelize= null;
 /**
  * 資料庫物件
  */
-let modules={};
+let modules ={};
 
 function connect(database,userName,password,option){
     return new Promise((resolve) => {
@@ -53,6 +56,11 @@ function loadTables(tables){
     return Promise.all(p);
 }
 
+function query(command)
+{
+    return sequelize.query(command,{type: Sequelize.QueryTypes.SELECT});
+}
+module.exports.query = query;
 module.exports.op=Sequelize.Op;
 module.exports.modules=modules;
 module.exports.connect=connect;
