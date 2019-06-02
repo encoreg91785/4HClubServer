@@ -8,12 +8,12 @@
 }
 
 .loading_area{
-    width: 30vw;
-    height: 50vh;
+    width: 600px;
+    height: 600px;
     background-color: white;
     position: absolute;
-    left: 35vw;
-    top: calc(50% - 15vw);
+    left: calc(50% - 300px);
+    top: calc(50% - 300px);
     border-radius: 2vw;
     border-style: solid;
     border-width: 0.8vh;
