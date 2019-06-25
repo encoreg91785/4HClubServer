@@ -25,7 +25,7 @@ let taskData={};
         let cardp=mysql.modules.carddata.findAll().then(result=>{
             if(result!=null){
                 result.forEach(e=>{
-                    cardData[e['qrcode']]=e;
+                    cardData[e['id']]=e;
                 });
             }
             else{

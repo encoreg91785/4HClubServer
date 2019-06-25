@@ -28,19 +28,21 @@ module.exports.defineTables={
     taskdata:{
         table:{
             qrcode:{type:Sequelize.STRING(50),allowNull: false,unique: true,primaryKey: true},
-            cardqrcode:{type:Sequelize.STRING(50),allowNull: false},
+            cardid:{type:Sequelize.STRING(50),allowNull: false},
             type:{type:Sequelize.STRING(50),allowNull: true},
             name:{type:Sequelize.STRING(50),allowNull: true},
-            condition:{type:Sequelize.STRING},
+            condition:{type:Sequelize.STRING,defaultValue:0},
+            max:{type:Sequelize.INTEGER,defaultValue:-1},
             information:{type:Sequelize.STRING},
         },
         option:null,
     },
     carddata:{
         table:{
-            qrcode:{type:Sequelize.STRING(50),allowNull: false,unique: true,primaryKey: true},
-            name:{type:Sequelize.STRING(50),allowNull: true},
-            type:{type:Sequelize.STRING(50),allowNull: true},
+            id:{type:Sequelize.STRING(50),allowNull: false,unique: true,primaryKey: true},
+            name:{type:Sequelize.STRING(50),allowNull: false},
+            type:{type:Sequelize.STRING(50),allowNull: false},
+            level:{type:Sequelize.STRING(50),allowNull: false},
             max:{type:Sequelize.INTEGER,defaultValue:-1},
         },
         option:null,
@@ -49,9 +51,10 @@ module.exports.defineTables={
         table:{
             id:{type:Sequelize.INTEGER,primaryKey: true,autoIncrement: true,},
             playerqrcode:{type:Sequelize.STRING(50),allowNull: false},
-            cardqrcode:{type:Sequelize.STRING(50),allowNull: false},
+            cardid:{type:Sequelize.STRING(50),allowNull: false},
             from:{type:Sequelize.STRING(50),allowNull: false},
             create:{type:Sequelize.DATE,allowNull: false},
+            submit:{type:Sequelize.DATE,allowNull: true},
         },
         option:null,
     },
@@ -60,11 +63,27 @@ module.exports.defineTables={
             id:{type:Sequelize.INTEGER,primaryKey: true,autoIncrement: true,},
             playerqrcode:{type:Sequelize.STRING(50),allowNull: false},
             taskqrcode:{type:Sequelize.STRING(50),allowNull: false},
-            submit:{type:Sequelize.DATE,allowNull: true},
             create:{type:Sequelize.DATE,allowNull: false},
         },
         option:null,
+    },
+    accomplishment:{
+        table:{
+            key:{type:Sequelize.STRING,allowNull: false,unique: true,primaryKey: true},
+            create:{type:Sequelize.DATE,allowNull: false},
+        },
+        option:null
+    },
+    bulletin:{
+        table:{
+            id:{type:Sequelize.INTEGER,primaryKey: true,autoIncrement: true,},
+            message:{type:Sequelize.INTEGER,allowNull: false},
+            type:{type:Sequelize.INTEGER,allowNull: false},
+            create:{type:Sequelize.DATE,allowNull: false},
+        },
+        option:null
     }
+    
 }
 
 /**

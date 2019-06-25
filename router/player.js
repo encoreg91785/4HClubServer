@@ -31,8 +31,12 @@ router.get("/",(req,res)=>{
             if(result!=null){
                 result.update({update:Date.now()});
                 result.update=Date.now();
+                res.json(getResTemp(response.successful,result));
             }
-            res.json(getResTemp(response.successful,result));
+            else{
+                res.json(getResTemp(response.getError,"result is null"));
+            }
+           
         });
     }
     else{

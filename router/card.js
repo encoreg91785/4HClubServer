@@ -21,18 +21,13 @@ router.all("/",(req,res,next)=>{
  */
 router.post("/",(req,res)=>{
     let qr =req.body.playerqrcode;
-    let cardArray =req.body.cardqrcode;
+    let cardArray =req.body.cardid;
     let fromType = req.body.from;
+    let confirm = req.body.confirm;
     if(cardArray!=null&&cardArray.length>0&&stringIsNullOrEmpty(qr)){
         let dataArray =[];
         cardArray.forEach(e=>{
-            let f = null;
-            if(fromType == 'task'){
-                let t =  Object.values(dataMg.taskData).find(td=>td.cardqrcode == e);
-                if(t!=null&&t.qrcode!=null)f =t.qrcode;
-            } 
-            else console.log(fromType+" not defind");
-            let d = {playerqrcode:qr,cardqrcode:e,create:Date.now(),from:f};
+            let d = {playerqrcode:qr,cardid:e,create:Date.now(),from:fromType,confirm:confirm};
             dataArray.push(d);
         });
 
@@ -55,7 +50,7 @@ router.post("/",(req,res)=>{
 router.get("/",(req,res)=>{
     let playerqrcode =req.query.playerqrcode;
     if(stringIsNullOrEmpty(playerqrcode)){
-        mysql.modules.card.findAll({where:{playerqrcode:playerqrcode}}).then(result=>{
+        mysql.modules.card.findAll({where:{playerqrcode:playerqrcode,submit:null}}).then(result=>{
             res.json(getResTemp(response.successful,result));
         }).catch(error=>{
             res.json(getResTemp(response.getError,error));
@@ -74,8 +69,26 @@ router.get("/all",(req,res)=>{
     });
 });
 
+/**
+ * 拿取實際卡片
+ */
 router.put("/",(req,res)=>{
-    res.send("put");
+    let cardid =req.query.cardid;
+    if(cardid!=null&&cardid.length>0){
+        mysql.modules.card.update({submit:Date.now()},{
+            where:{
+                id:{[mysql.op.in]:cardid},
+            }
+        }).then(result=>{
+            if(result>0)res.json(getResTemp(response.successful,result));
+            else res.json(getResTemp(response.updateError,"effect result is zero"));
+        }).catch(error=>{
+            res.json(getResTemp(response.updateError,error));
+        })
+    }
+    else{
+        res.json(getResTemp(response.updateError,"cardid is null or Empty or type is not array"));
+    }
 });
 
 router.delete("/",(req,res)=>{

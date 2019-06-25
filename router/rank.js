@@ -17,7 +17,15 @@ router.post("/",(req,res)=>{
     res.send("post");
 });
 
-router.get("/",(req,res)=>{
+router.get("/player",(req,res)=>{
+    mysql.query("select p.name,p.team, playerqrcode, max(`create`) as lastTime,count(*) as NUM FROM card JOIN player as p on playerqrcode=qrcode GROUP BY playerqrcode ORDER BY NUM DESC ,lasttime ;").then(result=>{
+        res.json(getResTemp(response.successful,result));
+    }).catch(error=>{
+        res.json(getResTemp(response.getError,error));
+    });
+});
+
+router.get("/team",(req,res)=>{
     mysql.query("select p.name,p.team, playerqrcode, max(`create`) as lastTime,count(*) as NUM FROM card JOIN player as p on playerqrcode=qrcode GROUP BY playerqrcode ORDER BY NUM DESC ,lasttime ;").then(result=>{
         res.json(getResTemp(response.successful,result));
     }).catch(error=>{
