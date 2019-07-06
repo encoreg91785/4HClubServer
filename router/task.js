@@ -24,17 +24,11 @@ router.post("/",(req,res)=>{
     
     if(playerArray!=null&&playerArray.length>0&&stringIsNullOrEmpty(task)){
         let dataArray =[];
-        let cardArray=[];
-        let cardid = dataMg.taskData[task].cardid;
         playerArray.forEach(e=>{
             let d = {playerqrcode:e,taskqrcode:task,create:Date.now()};
-            let c ={playerqrcode:e,cardid:cardid,create:Date.now(),from:task};
-            cardArray.push(c);
             dataArray.push(d);
         })
         mysql.modules.task.bulkCreate(dataArray).then(_=>{
-            return mysql.modules.card.bulkCreate(cardArray);
-        }).then(_=>{
             res.json(getResTemp(response.successful));
         }).catch(error=>{
             res.json(getResTemp(response.createError,error));

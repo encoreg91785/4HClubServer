@@ -77,7 +77,7 @@ module.exports.defineTables={
     bulletin:{
         table:{
             id:{type:Sequelize.INTEGER,primaryKey: true,autoIncrement: true,},
-            message:{type:Sequelize.INTEGER,allowNull: false},
+            message:{type:Sequelize.TEXT,allowNull: true},
             type:{type:Sequelize.INTEGER,allowNull: false},
             create:{type:Sequelize.DATE,allowNull: false},
         },

@@ -20,14 +20,15 @@ router.all("/",(req,res,next)=>{
  * 新增卡片
  */
 router.post("/",(req,res)=>{
-    let qr =req.body.playerqrcode;
-    let cardArray =req.body.cardid;
-    let fromType = req.body.from;
+    let playerArrayr =req.body.playerqrcode;
+    let cardid =req.body.cardid;
+    let from = req.body.from;
     let confirm = req.body.confirm;
-    if(cardArray!=null&&cardArray.length>0&&stringIsNullOrEmpty(qr)){
+    let c = dataMg.cardData[cardid];
+    if(playerArrayr!=null&&playerArrayr.length>0&&stringIsNullOrEmpty(cardid)){
         let dataArray =[];
-        cardArray.forEach(e=>{
-            let d = {playerqrcode:qr,cardid:e,create:Date.now(),from:fromType,confirm:confirm};
+        playerArrayr.forEach(e=>{
+            let d = {playerqrcode:e,cardid:cardid,create:Date.now(),from:from,confirm:confirm};
             dataArray.push(d);
         });
 
@@ -68,6 +69,17 @@ router.get("/all",(req,res)=>{
         res.json(getResTemp(response.getError,error));
     });
 });
+
+/**
+ * 取得卡片數量
+ */
+router.get("/count",(req,res)=>{
+    let playerqrcode =req.query.playerqrcode;
+    let cardid =req.query.cardid;
+    mysql.modules.card.count({where:{playerqrcode:playerqrcode,id:cardid}}).then(result=>{
+        res.json(getResTemp(response.successful,result));
+    })
+})
 
 /**
  * 拿取實際卡片

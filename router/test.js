@@ -19,7 +19,7 @@ router.post("/",(req,res)=>{
 });
 
 router.get("/",(req,res)=>{
-    res.send("get");
+    res.json(getResTemp(response.successful));
 });
 
 router.put("/",(req,res)=>{

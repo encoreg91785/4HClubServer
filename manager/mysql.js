@@ -3,10 +3,12 @@ const Sequelize = require('sequelize');
 const constantData = require('../utility/constData');
 /**
  * 連線實體
+ * @type {Sequelize.Sequelize}
  */
 let sequelize= null;
 /**
  * 資料庫物件
+ * @type {Sequelize.Model}
  */
 let modules ={};
 

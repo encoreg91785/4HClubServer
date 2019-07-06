@@ -21,19 +21,12 @@ router.get("/",(req,res)=>{
     res.json(getResTemp(response.successful,{card:temp.cardData,task:temp.taskData}));
 });
 
-router.get("/taskDataAndcardData/count",(req,res)=>{
+router.get("/taskAndcard/count",(req,res)=>{
     let taskqrcode =req.query.taskqrcode;
     let cardid =req.query.cardid;
     let t = mysql.modules.task.count({where:{taskqrcode:taskqrcode}});
     let c= mysql.modules.card.count({where:{cardid:cardid}});
     Promise.all([t,c]).then(result=>{
-        res.json(getResTemp(response.successful,result));
-    })
-});
-
-router.get("/cardData/count",(req,res)=>{
-    let cardid =req.query.cardid;
-    mysql.modules.card.count({where:{cardid:cardid}}).then(result=>{
         res.json(getResTemp(response.successful,result));
     })
 });

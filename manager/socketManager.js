@@ -41,7 +41,6 @@ server.on('connection', (socket) => {
                     break;
                 default:
                     console.log(data.action + " Does Not Exist");
-
                     break;
             }
         }
