@@ -16,15 +16,18 @@ const actionEnum = {
  * @type {PointData[]}
  */
 let pointList = [];
-
+let currentId=0;
 server.on('connection', (socket) => {
     sockettList.push(socket);
     console.log('connection');
     socket.on('data', (buf) => {
-        /**
+       
+        let str = buf.toString('utf8');
+        console.log(str);
+         /**
          * @type {ProtocolData}
          */
-        let data = JSON.parse(buf);
+        let data = JSON.parse(str);
         if (data != null && data.action != null && data.action != '') {
             switch (data.action) {
                 case actionEnum.deletePoint:
@@ -114,11 +117,13 @@ function deletePoint(id) {
  * @param {PointData} data 
  */
 function addPoint(data) {
-    if (data != null & data.id != null) {
-        let id = Number(data.id);
+    if (data != null & data.id == 0) {
+        currentId++;
+        let id = currentId;
         if (id != NaN) {
             let p = findPoint(id);
             if (p == null) {
+                data.id = currentId;
                 pointList.push(data);
                 sockettList.forEach(e => {
                     e.write(combineData(actionEnum.addPoint, data));
