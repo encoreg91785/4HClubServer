@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
         let pls = [];
         playerArrayr.forEach(e => {
             if (c.max == 0) {
-                let p = mysql.modules.card.count({ where: { playerqrcode: playerqrcode, cardid: cardid } }).then(result => {
+                let p = mysql.modules.card.count({ where: { playerqrcode: e, cardid: cardid } }).then(result => {
                     if (result == 0) {
                         let d = { playerqrcode: e, cardid: cardid, create: Date.now(), from: from, confirm: confirm };
                         dataArray.push(d);
