@@ -16,37 +16,22 @@ const actionEnum = {
  * @type {PointData[]}
  */
 let pointList = [];
-let currentId=0;
+let currentId = 0;
 server.on('connection', (socket) => {
     sockettList.push(socket);
     console.log('connection');
     socket.on('data', (buf) => {
-       
+
         let str = buf.toString('utf8');
         console.log(str);
-         /**
-         * @type {ProtocolData}
+        /**
+         * @type {[]}
          */
-        let data = JSON.parse(str);
-        if (data != null && data.action != null && data.action != '') {
-            switch (data.action) {
-                case actionEnum.deletePoint:
-                    deletePoint(data.data);
-                    break;
-                case actionEnum.updatePoint:
-                    updatePoint(data.data);
-                    break;
-                case actionEnum.addPoint:
-                    addPoint(data.data);
-                    break;
-                case actionEnum.getAllPoint:
-                    getAllPoint(socket);
-                    break;
-                default:
-                    console.log(data.action + " Does Not Exist");
-                    break;
-            }
-        }
+        let b = str.match(/(\{.+?\})(?={|$)/g);
+        b.forEach(e=>{
+            parseData(e,socket);
+        })
+
     });
 
     //連線中斷時
@@ -65,6 +50,32 @@ server.on('connection', (socket) => {
         console.log(e);
     });
 });
+
+function parseData(str,socket) {
+    /**
+    * @type {ProtocolData}
+    */
+    let data = JSON.parse(str);
+    if (data != null && data.action != null && data.action != '') {
+        switch (data.action) {
+            case actionEnum.deletePoint:
+                deletePoint(data.data);
+                break;
+            case actionEnum.updatePoint:
+                updatePoint(data.data);
+                break;
+            case actionEnum.addPoint:
+                addPoint(data.data);
+                break;
+            case actionEnum.getAllPoint:
+                getAllPoint(socket);
+                break;
+            default:
+                console.log(data.action + " Does Not Exist");
+                break;
+        }
+    }
+}
 
 /**
  * 
@@ -177,10 +188,9 @@ function findPoint(id) {
 * @property {string} belong 目前所屬
 */
 
-function init(){
+function init() {
     server.listen({ port: 1337 }, () => { console.log("Socket Server Run") });//启动监听 
 }
-module.exports={
-    init:init
+module.exports = {
+    init: init
 }
- 
