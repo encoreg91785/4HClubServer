@@ -18,6 +18,7 @@ const actionEnum = {
 let pointList = [];
 let currentId = 0;
 server.on('connection', (socket) => {
+    socket.setNoDelay(true);
     sockettList.push(socket);
     console.log('connection');
     socket.on('data', (buf) => {
