@@ -16,7 +16,6 @@ const actionEnum = {
  * @type {PointData[]}
  */
 let pointList = [];
-let currentId = 0;
 server.on('connection', (socket) => {
     socket.setNoDelay(true);
     sockettList.push(socket);
@@ -129,13 +128,10 @@ function deletePoint(id) {
  * @param {PointData} data 
  */
 function addPoint(data) {
-    if (data != null & data.id == 0) {
-        currentId++;
-        let id = currentId;
-        if (id != NaN) {
-            let p = findPoint(id);
+    if (data != null & data.id != 0) {
+        if (data.id != NaN) {
+            let p = findPoint(data.id);
             if (p == null) {
-                data.id = currentId;
                 pointList.push(data);
                 sockettList.forEach(e => {
                     e.write(combineData(actionEnum.addPoint, data));
@@ -185,11 +181,15 @@ function findPoint(id) {
 /**
 * @typedef {Object} PointData
 * @property {number} id 點的編號
-* @property {number[]} position 位置
 * @property {string} belong 目前所屬
 */
 
 function init() {
+    for (let index = 0; index < 9; index++) {
+        let data = {id:index,belong:"無"}
+        addPoint(data);
+    }
+    
     server.listen({ port: 1337 }, () => { console.log("Socket Server Run") });//启动监听 
 }
 module.exports = {
